@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html ng-app="filmes">
+<head>
+    <meta charset="UTF-8">
+    <title>Filmes que já assisti</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/filmes.controller.js"></script>
+    <script src="scripts/filme.directive.js"></script>
+    <script src="scripts/meus-filmes.factory.js"></script>
+</head>
+<body>
+    <div class="container" ng-controller="FilmesController">
+        <h1>{{ titulo }}</h1>
+
+        <div class="lista-filmes">
+            <div aw-filme="f" fn-fechar="removerFilme(f.id)" ng-repeat="f in filmes"></div>
+        </div>
+
+        <hr>
+
+        <form name="formulario" class="form-filmes" ng-submit="criarFilme()" novalidate>
+            <h1>Adicionar Filme</h1>
+            <div class="form-campo">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" name="titulo" ng-model="novoFilme.titulo" required>
+                <div ng-if="(formulario.titulo.$touched || formulario.$submitted) && formulario.titulo.$invalid">
+                    <span ng-if="formulario.titulo.$error.required">Este campo é obrigatório</span>
+                </div>
+            </div>
+            <div class="form-campo pequeno">
+                <label for="ano">Ano de Lançamento</label>
+                <input type="number" id="ano" name="ano" ng-model="novoFilme.ano" required>
+                <div ng-if="(formulario.ano.$touched || formulario.$submitted) && formulario.ano.$invalid">
+                    <span ng-if="formulario.ano.$error.required">Este campo é obrigatório</span>
+                </div>
+            </div>
+            <div class="form-campo medio">
+                <label for="produtora">Produtora</label>
+                <input type="text" id="produtora" name="produtora" ng-model="novoFilme.produtora" required>
+                <div ng-if="(formulario.produtora.$touched || formulario.$submitted) && formulario.produtora.$invalid">
+                    <span ng-if="formulario.produtora.$error.required">Este campo é obrigatório</span>
+                </div>
+            </div>
+            <div class="form-campo">
+                <label for="cartaz">Url do Cartaz</label>
+                <input type="text" id="cartaz" name="cartaz" ng-model="novoFilme.cartaz"required>
+                <div ng-if="(formulario.cartaz.$touched || formulario.$submitted) && formulario.cartaz.$invalid">
+                    <span ng-if="formulario.cartaz.$error.required">Este campo é obrigatório</span>
+                </div>
+            </div>
+            <div class="form-campo">
+                <label for="sinopse">Sinópse</label>
+                <textarea id="sinopse" name="sinopse" ng-model="novoFilme.sinopse" rows="5" required></textarea>
+                <div ng-if="(formulario.sinopse.$touched || formulario.$submitted) && formulario.sinopse.$invalid">
+                    <span ng-if="formulario.sinopse.$error.required">Este campo é obrigatório</span>
+                </div>
+            </div>
+
+            <footer>
+                <button type="reset" ng-click="resetForm()">Limpar</button>
+                <button type="submit">Salvar</button>
+            </footer>
+        </form>
+    </div>
+
+</body>
+</html>
